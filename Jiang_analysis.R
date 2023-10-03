@@ -8,7 +8,7 @@
 library(tidyverse)
 library(gsubfn)
 
-hear <- readRDS('D:/Job/Projects/Luxembourg/hearing aids/Jiang-commentary/hear.Rds')
+hear <- readRDS('hear.Rds')
 
 
 ## The `analyse_hearing` function takes in a number of arguments that refer to different ways in which
