@@ -9,10 +9,8 @@ library(tidyverse)
 library(zoo)
 
 
-setwd('D:/Job')
-
 # inpatient
-diagnoses <- read.csv('Raw data/inpatient.csv')
+diagnoses <- read.csv('inpatient.csv')
 #colnames(diagnoses) <- c('id', 'icd10', 'icd10_date', 'icd9', 'icd9_date')
 
 diagnoses[diagnoses==""]  <- NA 
@@ -46,8 +44,8 @@ inpatient <- rbind(icd9, icd10)
 ids_missing <- unique(filter(merge(icd10_long, icd10_date_long, by = c('id', 'column'), all = TRUE), is.na(date)) %>% select(id))
 
 # get the missing participants from the master hesin table
-diagnoses_dates <- read.csv('Raw data/hesin.txt', sep="\t")
-diagnoses <- read.csv('Raw data/hesin_diag.txt', sep="\t")
+diagnoses_dates <- read.csv('hesin.txt', sep="\t")
+diagnoses <- read.csv('hesin_diag.txt', sep="\t")
 diagnoses_dates <- filter(diagnoses_dates, eid %in% ids_missing$id)
 diagnoses <- filter(diagnoses, eid %in% ids_missing$id)
 diagnoses_dates <- subset(diagnoses_dates, select=c(eid, ins_index, admidate))
@@ -62,27 +60,3 @@ inpatient <- rbind(inpatient, diagnoses)
 
 saveRDS(inpatient, file = "inpatient_diagnoses.rds")
 write.csv(inpatient, 'inpatient_diagnoses.csv', row.names = FALSE)
-
-
-
-### For relevant disorders without UKB data field ID, search the diagnoses for them
-
-# hypercholesterolemia
-# hyperparathyroidism, hypoparathyroidism
-# hyperadrenalism/hypoadrenalism,
-# hyperglycemia/hypoglycemia
-# hyperpituitarism/hypopituitarism
-# coeliac disease
-
-diag <- readRDS('Raw data/inpatient_diagnoses.rds')
-
-
-
-
-
-
-
-
-
-
-
