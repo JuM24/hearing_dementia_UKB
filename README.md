@@ -10,4 +10,4 @@ gsubfn 0.7,
 marginaleffects 0.14.0, 
 survival 3.5.5, 
 tidyverse 2.0.0, 
-zoo 1.8.11, 
+zoo 1.8.11.
