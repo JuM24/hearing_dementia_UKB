@@ -24,7 +24,7 @@ opt_outs <- read.csv('participant_opt_out.csv')
 # read in the dataset
 hear <- read.csv('jiang_data.csv') %>%
   rename(id = eid) %>%
-  filter(!id %in% opt_outs$X1005679)
+  filter(!id %in% opt_outs$id)
 
 # extract columns that match the pattern (start of line, 'X', digit, '.0.')
 cols_to_keep <- grep("X\\d+\\.0\\.", names(hear), value = TRUE)
@@ -467,4 +467,5 @@ apoe <- subset(apoe, select=c(id, apoe_carrier))
 hear <- merge(hear, apoe, by = 'id', all.x = TRUE)
 
 saveRDS(hear, file = "hear.rds")
+
 
